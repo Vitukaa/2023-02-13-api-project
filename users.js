@@ -4,8 +4,33 @@ usersList.classList.add('users-list')
 
 
 
+// async function getUsersNames() {
+//     const res = await fetch('https://jsonplaceholder.typicode.com/users?_embed=posts')
+//     const users = await res.json()
+
+//     console.log(users)
+//     usersWrapper.append(usersList)
+
+//     users.forEach(user => {
+//         console.log(user)
+//             const userItem = document.createElement('li');
+//             userItem.classList.add('user-item');
+
+//             const userItemLink = document.createElement('a')
+//             userItemLink.href = './user.html'
+//             userItemLink.textContent = `${user.name} (${user.posts.length})`
+
+//             userItem.append(userItemLink)
+//             usersList.append(userItem);
+//           })
+// }
+// getUsersNames()
+
+
 
 async function getUsersNames() {
+    const userPostsCount = await getUserPostsCount()
+    console.log(userPostsCount)
     const res = await fetch('https://jsonplaceholder.typicode.com/users')
     const usersArr = await res.json()
     
@@ -15,7 +40,7 @@ async function getUsersNames() {
 
         const userListItemLink = document.createElement('a')
         userListItemLink.setAttribute('href', './user.html')
-        userListItemLink.textContent = user.name
+        userListItemLink.textContent = `${user.name} (${userPostsCount[user.id]}) `
 
         usersListItem.append(userListItemLink)
         usersList.append(usersListItem)
@@ -44,11 +69,11 @@ async function getUserPostsCount() {
         }
     })
 
-
+    return userPostsCount
 
     console.log(userIds)
     console.log(userPostsCount)
     console.log(postsArr)
 }
-getUserPostsCount()
+// getUserPostsCount()
 
