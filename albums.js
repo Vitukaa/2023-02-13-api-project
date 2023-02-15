@@ -42,7 +42,7 @@ function createAlbumItemElement(album) {
     albumItem.classList.add('album-item')
 
     const albumItemLink = document.createElement('a')
-    albumItemLink.setAttribute('href', './album.html')
+    albumItemLink.setAttribute('href', './album.html?album-id=' + album.id)
 
     const albumTitle = document.createElement('h2')
     albumTitle.textContent = `${title} (${photosNumber}), author: ${album.user.name}`

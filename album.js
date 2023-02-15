@@ -1,9 +1,11 @@
 async function init() {
+    const queryParams = location.search
+    const urlParams = new URLSearchParams(queryParams)
+    const id = urlParams.get('album-id')
 
     const pageContent = document.querySelector('#page-content')
 
-    const albumId = 11
-    const res = await fetch(`https://jsonplaceholder.typicode.com/albums/${albumId}?_expand=user&_embed=photos`)
+    const res = await fetch(`https://jsonplaceholder.typicode.com/albums/${id}?_expand=user&_embed=photos`)
     const album = await res.json()
 
     const albumContent = renderAlbum(album)
@@ -27,7 +29,8 @@ function renderAlbum(album) {
     
     const authorLink = document.createElement('a')
     authorLink.classList.add('author-link')
-    authorLink.href = './user.html'
+    authorLink.href = './user.html?user-id=' + album.userId
+    console.log(album)
     authorLink.textContent = album.user.name
     
     authorName.append(authorLink)
@@ -40,7 +43,6 @@ function renderPhotos(album) {
     albumPhotosWrapper.classList.add('album-photos-wrapper')
 
     album.photos.forEach(photo => {
-        console.log(photo)
         const photoElement = document.createElement('img')
         photoElement.classList.add('album-photo')
         photoElement.src = photo.thumbnailUrl

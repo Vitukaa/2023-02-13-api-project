@@ -1,17 +1,18 @@
 async function init() {
     const pageContent = document.querySelector('#page-content')
 
+    const queryParams = location.search
+    const urlParams = new URLSearchParams(queryParams)
+    const id = urlParams.get('post-id')
+
     const postId = 11
 
-    const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}?_expand=user&_embed=comments`)
+    const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}?_expand=user&_embed=comments`)
     const post = await res.json()
-    console.log(post)
 
     const mainInfo = renderPost(post)
     
     pageContent.append(mainInfo)
-
-    
 }
 
 function renderPost(post) {
@@ -42,9 +43,8 @@ function renderPost(post) {
     commentsTitle.textContent = 'Comments:'
 
     commentsWrapper.append(commentsTitle)
-
-    console.log(post)
     
+
     post.comments.forEach(comment => {
         
         const commentWrapper = document.createElement('div')
@@ -65,7 +65,6 @@ function renderPost(post) {
 
         commentWrapper.append(commentTitle, commentContent, commentAuthor)
         commentsWrapper.append(commentWrapper)
-        
     })
     
     const linkToOtherPosts = document.createElement('a')
@@ -74,10 +73,11 @@ function renderPost(post) {
     linkToOtherPosts.textContent = `Go to other ${post.user.name} posts`
 
     
-    
     authorName.append(authorLink)
     mainInfoWrapper.append(title, authorName, postContent, commentsWrapper, linkToOtherPosts)
     
     return mainInfoWrapper
 }
+
+
 init()

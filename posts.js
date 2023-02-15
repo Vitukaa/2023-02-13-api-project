@@ -19,7 +19,7 @@ async function getPosts() {
         
         const postTitleLink = document.createElement('a')
         postTitleLink.classList.add('post-title-link')
-        postTitleLink.setAttribute('href', './post.html')
+        postTitleLink.setAttribute('href', './post.html?post-id=' + post.id)
         postTitleLink.textContent = post.title
 
         const postAuthor = document.createElement('p')
@@ -30,7 +30,7 @@ async function getPosts() {
 
         const postAuthorLink = document.createElement('a')
         postAuthorLink.classList.add('post-author-link')
-        postAuthorLink.setAttribute('href', './user.html')
+        postAuthorLink.setAttribute('href', './user.html?user-id=' + post.userId)
         postAuthorLink.textContent = post.user.name
         
 

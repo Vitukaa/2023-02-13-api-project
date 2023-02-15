@@ -1,5 +1,9 @@
 async function init() {
-    const res = await fetch('https://jsonplaceholder.typicode.com/users/1?_embed=posts&_embed=albums')
+    const queryParams = location.search
+    const urlParams = new URLSearchParams(queryParams)
+    const id = urlParams.get('user-id')
+
+    const res = await fetch(`https://jsonplaceholder.typicode.com/users/${id}?_embed=posts&_embed=albums`)
     const user = await res.json()
     
     const pageContent = document.querySelector('#page-content')
@@ -88,14 +92,14 @@ function renderPosts(user) {
 
         const postItemLink = document.createElement('a')
         postItemLink.classList.add('post-item-link')
-        postItemLink.setAttribute('href', './post.html')
+        postItemLink.setAttribute('href', './post.html?post-id=' + post.id)
         postItemLink.textContent = post.title
         
         
         postItem.append(postItemLink)
         postsList.append(postItem)
     })
-    
+
     const postsWrapper = document.createElement('div')
     postsWrapper.classList.add('posts-wrapper')
 
@@ -119,7 +123,7 @@ function renderAlbums(user) {
         albumItem.classList.add('album-item')
         
         const albumItemLink = document.createElement('a')
-        albumItemLink.href = './album.html'
+        albumItemLink.href = './album.html?album-id=' + album.id
         albumItemLink.classList.add('album-item-link')
         albumItemLink.textContent = album.title
 

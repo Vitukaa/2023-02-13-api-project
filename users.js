@@ -19,7 +19,7 @@ async function getUsersNames() {
             userItem.classList.add('user-item');
 
             const userItemLink = document.createElement('a')
-            userItemLink.href = './user.html'
+            userItemLink.href = './user.html?user-id=' + user.id
             userItemLink.textContent = `${user.name} (${user.posts.length})`
 
             userItem.append(userItemLink)
