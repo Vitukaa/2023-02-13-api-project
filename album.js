@@ -7,8 +7,9 @@ async function init() {
     const album = await res.json()
 
     const albumContent = renderAlbum(album)
+    const albumPhotos = renderPhotos(album)
 
-    pageContent.append(albumContent)
+    pageContent.append(albumContent, albumPhotos)
 
     console.log(album)
 }
@@ -34,7 +35,21 @@ function renderAlbum(album) {
     return albumContentWrapper
 }
 
+function renderPhotos(album) {
+    const albumPhotosWrapper = document.createElement('div')
+    albumPhotosWrapper.classList.add('album-photos-wrapper')
 
+    album.photos.forEach(photo => {
+        console.log(photo)
+        const photoElement = document.createElement('img')
+        photoElement.classList.add('album-photo')
+        photoElement.src = photo.thumbnailUrl
+        photoElement.alt = photo.title
+
+        albumPhotosWrapper.append(photoElement)
+    });
+    return albumPhotosWrapper
+}
 
 
 
