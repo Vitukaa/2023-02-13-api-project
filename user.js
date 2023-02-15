@@ -1,9 +1,16 @@
-
-async function getUserInfo() {
-    const res = await fetch('https://jsonplaceholder.typicode.com/users/1')
+async function init() {
+    const res = await fetch('https://jsonplaceholder.typicode.com/users/1?_embed=posts&_embed=albums')
     const user = await res.json()
     
     const pageContent = document.querySelector('#page-content')
+
+
+    const userMainInfo = getMainInfo(user)
+    const additionalInfo = getAdditionalUserInfo(user)
+    pageContent.append(userMainInfo, additionalInfo)
+}
+
+function getMainInfo(user) {
     const userWrapper = document.createElement('div')
     userWrapper.classList.add('user-wrapper')
 
@@ -26,12 +33,12 @@ async function getUserInfo() {
     const userAddressLink = `${user.address.street}, ${user.address.suite}, ${user.address.city}, ${user.address.zipcode}`
     addressLinkElement.href = `http://maps.google.com/?q=${userAddressLink}`
     addressLinkElement.target = `_blank`
-
+    
     const userPhone = user.phone
     const websiteLink = user.website
     websiteLinkElement.href = websiteLink
     const companyName = user.company.name
-
+    
     nameElement.textContent = `Name: ${fullName}`
     usernameElement.textContent = `Username: ${username}`
     contactsListTitle.textContent = 'Contacts:'
@@ -47,6 +54,92 @@ async function getUserInfo() {
     addressElement.append(addressLinkElement)
     contactsList.append(emailElement, addressElement, phoneElement)
     websiteElement.append(websiteLinkElement)
-    pageContent.append(nameElement, usernameElement, contactsListTitle, contactsList, websiteElement, companyElement)
+    userWrapper.append(nameElement, usernameElement, contactsListTitle, contactsList, websiteElement, companyElement)
+    
+    return userWrapper
 }
-getUserInfo()
+
+
+function getAdditionalUserInfo(user) {
+    const additionalInfoWrapper = document.createElement('div')
+    additionalInfoWrapper.classList.add('additional-info-wrapper')
+    
+    const postsWrapper = renderPosts(user)
+    const albumsWrapper = renderAlbums(user)
+    
+    
+    additionalInfoWrapper.append(postsWrapper, albumsWrapper)
+    return additionalInfoWrapper
+    
+}
+
+function renderPosts(user) {
+    const postsListTitle = document.createElement('h3')
+    postsListTitle.classList.add('posts-list-title')
+    postsListTitle.textContent = 'Posts uploaded:'
+    
+    const postsList = document.createElement('ol')
+    postsList.classList.add('posts-list')
+    
+    user.posts.forEach(post => {
+        
+        const postItem = document.createElement('li')
+        postItem.classList.add('post-item')
+
+        const postItemLink = document.createElement('a')
+        postItemLink.classList.add('post-item-link')
+        postItemLink.setAttribute('href', './post.html')
+        postItemLink.textContent = post.title
+        
+        
+        postItem.append(postItemLink)
+        postsList.append(postItem)
+    })
+    
+    const postsWrapper = document.createElement('div')
+    postsWrapper.classList.add('posts-wrapper')
+
+    postsWrapper.append(postsListTitle, postsList)
+    return postsWrapper
+}
+
+
+function renderAlbums(user) {
+    const albumsListTitle = document.createElement('h3')
+    albumsListTitle.classList.add('albums-list-title')
+    albumsListTitle.textContent = 'Albums created:'
+    
+    const albumsList = document.createElement('ul')
+    albumsList.classList.add('albums-list')
+
+
+    user.albums.forEach(album => {
+        console.log(album)
+        const albumItem = document.createElement('li')
+        albumItem.classList.add('album-item')
+        
+        const albumItemLink = document.createElement('a')
+        albumItemLink.href = './album.html'
+        albumItemLink.classList.add('album-item-link')
+        albumItemLink.textContent = album.title
+
+        albumItem.append(albumItemLink)
+        albumsList.append(albumItem)
+    })
+
+    const albumsWrapper = document.createElement('div')
+    albumsWrapper.classList.add('albums-wrapper')
+    
+    albumsWrapper.append(albumsListTitle, albumsList)
+    return albumsWrapper
+}
+
+
+
+
+
+
+
+
+
+init()
