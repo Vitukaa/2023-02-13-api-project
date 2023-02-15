@@ -1,3 +1,5 @@
+import { createPageMainHeader } from "./header.js"
+
 const pageContent = document.querySelector('#page-content')
 const usersList = document.createElement('ul')
 usersList.classList.add('users-list')
@@ -5,6 +7,7 @@ usersList.classList.add('users-list')
 
 
 async function getUsersNames() {
+
     const res = await fetch('https://jsonplaceholder.typicode.com/users?_embed=posts')
     const users = await res.json()
 
@@ -29,56 +32,7 @@ async function getUsersNames() {
 getUsersNames()
 
 
-function createPageMainHeader() {
-    const header = document.createElement('header')
 
-    const nav = document.createElement('nav')
-    nav.classList.add('main-nav')
-
-    const menuList = document.createElement('ul')
-    menuList.classList.add('menu-list')
-
-    let menuItems = [
-        {
-            title: 'home',
-            path: 'index.html',
-        },
-        {
-            title: 'users',
-            path: 'users.html',
-        },
-        {
-            title: 'albums',
-            path: 'albums.html',
-        },
-        {
-            title: 'posts',
-            path: 'posts.html',
-        }
-    ]
-
-    menuItems.map(menuItem => {
-        const menuItemElement = document.createElement('li')
-        menuItemElement.classList.add('menu-item')
-
-        if (location.pathname === '/' + menuItem.path) {
-            menuItemElement.classList.add('active')
-        }
-
-        const menuLink = document.createElement('a')
-        menuLink.href = './' + menuItem.path
-        menuLink.classList.add('nav-list-item-link')
-        menuLink.textContent = menuItem.title
-
-        menuItemElement.append(menuLink)
-        menuList.append(menuItemElement)
- 
-    })
-
-    nav.append(menuList)
-    header.append(nav)
-    return header
-}
 // async function getUsersNames() {
 //     const userPostsCount = await getUserPostsCount()
 //     const res = await fetch('https://jsonplaceholder.typicode.com/users')

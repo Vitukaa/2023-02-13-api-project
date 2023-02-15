@@ -1,11 +1,13 @@
+import { createPageMainHeader } from "./header.js"
+
 async function init() {
     const pageContent = document.querySelector('#page-content')
+    pageContent.before(createPageMainHeader())
 
     const queryParams = location.search
     const urlParams = new URLSearchParams(queryParams)
     const id = urlParams.get('post-id')
 
-    const postId = 11
 
     const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}?_expand=user&_embed=comments`)
     const post = await res.json()

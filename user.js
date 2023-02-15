@@ -1,4 +1,9 @@
+import { createPageMainHeader } from "./header.js"
+
 async function init() {
+    const pageContent = document.querySelector('#page-content')
+    pageContent.before(createPageMainHeader())
+
     const queryParams = location.search
     const urlParams = new URLSearchParams(queryParams)
     const id = urlParams.get('user-id')
@@ -6,7 +11,6 @@ async function init() {
     const res = await fetch(`https://jsonplaceholder.typicode.com/users/${id}?_embed=posts&_embed=albums`)
     const user = await res.json()
     
-    const pageContent = document.querySelector('#page-content')
 
 
     const userMainInfo = getMainInfo(user)

@@ -1,9 +1,14 @@
+import { createPageMainHeader } from "./header.js"
+
 async function init() {
+    const pageContent = document.querySelector('#page-content')
+    pageContent.before(createPageMainHeader())
+
+
     const queryParams = location.search
     const urlParams = new URLSearchParams(queryParams)
     const id = urlParams.get('album-id')
 
-    const pageContent = document.querySelector('#page-content')
 
     const res = await fetch(`https://jsonplaceholder.typicode.com/albums/${id}?_expand=user&_embed=photos`)
     const album = await res.json()
