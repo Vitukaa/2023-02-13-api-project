@@ -1,0 +1,24 @@
+.users-list {
+  margin: 0;
+  padding: 20px 0 20px 40px;
+  list-style-type: none;
+}
+.users-list .user-item {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  padding: 20px 50px;
+}
+.users-list .user-item::before {
+  content: "";
+  background-image: url("https://icons.veryicon.com/png/o/internet--web/55-common-web-icons/person-4.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  padding: 20px 20px;
+}
+.users-list .user-item a {
+  text-decoration: none;
+  color: darkred;
+  font-size: 22px;
+  padding: 20px 0;
+}/*# sourceMappingURL=users.css.map */

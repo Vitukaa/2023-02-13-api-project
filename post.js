@@ -2,7 +2,8 @@ import { createPageMainHeader } from "./header.js"
 
 async function init() {
     const pageContent = document.querySelector('#page-content')
-    pageContent.before(createPageMainHeader())
+    const pageContentWrapper = document.querySelector('.page-content-wrapper')
+    pageContentWrapper.before(createPageMainHeader())
 
     const queryParams = location.search
     const urlParams = new URLSearchParams(queryParams)
@@ -21,6 +22,9 @@ function renderPost(post) {
     const mainInfoWrapper = document.createElement('div')
     mainInfoWrapper.classList.add('main-info-wrapper')
     
+    const postWrapper = document.createElement('div')
+    postWrapper.classList.add('post-wrapper')
+
     const title = document.createElement('h1')
     title.classList.add('title')
     title.textContent = post.title
@@ -30,7 +34,7 @@ function renderPost(post) {
     
     const authorLink = document.createElement('a')
     authorLink.classList.add('author-link')
-    authorLink.href = './user.html'
+    authorLink.href = './user.html?user-id=' + post.userId
     authorLink.textContent = post.user.name
 
     const postContent = document.createElement('p')
@@ -61,7 +65,7 @@ function renderPost(post) {
         commentContent.textContent = comment.body
 
         const commentAuthor = document.createElement('a')
-        commentAuthor.classList.add('comment=author')
+        commentAuthor.classList.add('comment-author')
         commentAuthor.href = 'mailto:comment.email'
         commentAuthor.textContent = comment.email
 
@@ -76,7 +80,8 @@ function renderPost(post) {
 
     
     authorName.append(authorLink)
-    mainInfoWrapper.append(title, authorName, postContent, commentsWrapper, linkToOtherPosts)
+    postWrapper.append(title, authorName, postContent)
+    mainInfoWrapper.append(postWrapper, commentsWrapper, linkToOtherPosts)
     
     return mainInfoWrapper
 }

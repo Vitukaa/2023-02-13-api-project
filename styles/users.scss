@@ -1,0 +1,30 @@
+.users-list {
+    margin: 0;
+    padding: 20px 0 20px 40px;
+    list-style-type: none;
+
+    // list-style-image: url('https://icons.veryicon.com/png/o/internet--web/55-common-web-icons/person-4.png');
+
+    .user-item {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        padding: 20px 50px;
+
+
+        &::before {
+            content: "";
+            background-image: url('https://icons.veryicon.com/png/o/internet--web/55-common-web-icons/person-4.png');
+        //    object-fit: contain;
+           background-repeat: no-repeat;
+           background-size: contain;
+           padding: 20px 20px;
+        }
+        a {
+            text-decoration: none;
+            color: darkred;
+            font-size: 22px;
+            padding: 20px 0;
+        }
+    }
+}

@@ -1,0 +1,49 @@
+.main-info-wrapper .post-wrapper {
+  padding: 20px 50px;
+  box-shadow: 0 0 5px -2px;
+}
+.main-info-wrapper .post-wrapper .title {
+  color: darkred;
+  font-size: 28px;
+}
+.main-info-wrapper .post-wrapper .author-name {
+  font-size: 18px;
+  margin: 10px 0;
+  text-align: end;
+}
+.main-info-wrapper .post-wrapper .author-name .author-link {
+  text-decoration: none;
+  color: black;
+}
+.main-info-wrapper .post-wrapper .post-content {
+  font-size: 22px;
+  padding: 0 30px;
+}
+.main-info-wrapper .comments-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.main-info-wrapper .comments-wrapper .comments-title {
+  align-self: flex-start;
+}
+.main-info-wrapper .comments-wrapper .comment-wrapper {
+  padding: 20px;
+  border: 1px solid;
+  border-radius: 50px;
+  background-color: rgba(255, 248, 226, 0.79);
+}
+.main-info-wrapper .comments-wrapper .comment-wrapper .comment-title {
+  font-size: 20px;
+  margin: 10px;
+}
+.main-info-wrapper .comments-wrapper .comment-wrapper .comment-content {
+  margin: 5px 0;
+  font-size: 18px;
+}
+.main-info-wrapper .comments-wrapper .comment-wrapper .comment-author {
+  width: 100%;
+  display: inline-block;
+  text-align: end;
+}/*# sourceMappingURL=post.css.map */

@@ -1,0 +1,16 @@
+.post-wrapper {
+  padding: 30px;
+  margin: 20px 0;
+  box-shadow: 0 0 5px -2px;
+}
+.post-wrapper .post-title {
+  font-size: 28px;
+  margin: 0;
+}
+.post-wrapper .author {
+  font-size: 20px;
+  margin: 10px 0;
+}
+.post-wrapper p {
+  font-size: 22px;
+}/*# sourceMappingURL=posts.css.map */

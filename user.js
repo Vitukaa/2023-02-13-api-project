@@ -2,7 +2,8 @@ import { createPageMainHeader } from "./header.js"
 
 async function init() {
     const pageContent = document.querySelector('#page-content')
-    pageContent.before(createPageMainHeader())
+    const pageContentWrapper = document.querySelector('.page-content-wrapper')
+    pageContentWrapper.before(createPageMainHeader())
 
     const queryParams = location.search
     const urlParams = new URLSearchParams(queryParams)
@@ -23,16 +24,30 @@ function getMainInfo(user) {
     userWrapper.classList.add('user-wrapper')
 
     const nameElement = document.createElement('h1')
+    nameElement.classList.add('user-title')
     const usernameElement = document.createElement('h2')
+    usernameElement.classList.add('user-username')
+    const contactsListWrapper = document.createElement('div')
+    contactsListWrapper.classList.add('contacts-list-wrapper')
     const contactsListTitle = document.createElement('h3')
+    contactsListTitle.classList.add('contacts-title')
     const contactsList = document.createElement('ul')
+    contactsList.classList.add('contacts-list')
     const emailElement = document.createElement('li')
+    emailElement.classList.add('list-item')
     const addressElement = document.createElement('li')
+    addressElement.classList.add('list-item')
     const addressLinkElement = document.createElement('a')
+    addressLinkElement.classList.add('list-item-link')
     const phoneElement = document.createElement('li')
+    phoneElement.classList.add('list-item')
     const websiteElement =  document.createElement('p')
+    websiteElement.classList.add('website', 'info')
     const websiteLinkElement = document.createElement('a')
+    websiteLinkElement.classList.add('website-link')
     const companyElement = document.createElement('p')
+    companyElement.classList.add('company', 'info')
+
     
     // users.map(user => {
     const fullName = user.name
@@ -61,8 +76,9 @@ function getMainInfo(user) {
     
     addressElement.append(addressLinkElement)
     contactsList.append(emailElement, addressElement, phoneElement)
+    contactsListWrapper.append(contactsListTitle, contactsList)
     websiteElement.append(websiteLinkElement)
-    userWrapper.append(nameElement, usernameElement, contactsListTitle, contactsList, websiteElement, companyElement)
+    userWrapper.append(nameElement, usernameElement, contactsListWrapper, websiteElement, companyElement)
     
     return userWrapper
 }
@@ -127,8 +143,8 @@ function renderAlbums(user) {
         albumItem.classList.add('album-item')
         
         const albumItemLink = document.createElement('a')
-        albumItemLink.href = './album.html?album-id=' + album.id
         albumItemLink.classList.add('album-item-link')
+        albumItemLink.href = './album.html?album-id=' + album.id
         albumItemLink.textContent = album.title
 
         albumItem.append(albumItemLink)

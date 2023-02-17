@@ -1,0 +1,23 @@
+.albums-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+}
+.albums-list .album-item {
+  width: 100%;
+}
+.albums-list .album-item a {
+  display: flex;
+  gap: 50px;
+  align-items: center;
+  text-decoration: none;
+  color: darkred;
+}
+.albums-list .album-item a h2 {
+  letter-spacing: 0.02em;
+  font-size: 28px;
+}
+.albums-list .album-item a h3 {
+  font-weight: 500;
+  font-size: 20px;
+}/*# sourceMappingURL=albums.css.map */

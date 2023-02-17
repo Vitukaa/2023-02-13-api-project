@@ -5,9 +5,8 @@ async function getPosts() {
     const postsArr = await res.json()
     
     const pageContent = document.querySelector("#page-content")
-    const header = createPageMainHeader()
-
-    pageContent.before(header)
+    const pageContentWrapper = document.querySelector('.page-content-wrapper')
+    pageContentWrapper.before(createPageMainHeader())
 
 
 

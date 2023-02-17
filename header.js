@@ -1,5 +1,26 @@
 export function createPageMainHeader() {
     const header = document.createElement('header')
+    const headerContentWrapper = document.createElement('div')
+    headerContentWrapper.classList.add('header-content-wrapper')
+
+    const headerTitleWrapper = document.createElement('div')
+    headerTitleWrapper.classList.add('header-title-wrapper')
+
+    const headerLogoWrapper = document.createElement('div')
+    headerLogoWrapper.classList.add('header-logo-wrapper')
+
+    const headerLogo = document.createElement('img')
+    headerLogo.classList.add('header-logo')
+    headerLogo.src = 'https://res.cloudinary.com/lmn/image/upload/c_limit,h_360,w_640/e_sharpen:100/f_auto,fl_lossy,q_auto/v1/gameskinny/b9f8d1d28618c4d4f1122e4d9b4acf01.jpg'
+    headerLogo.alt = 'shiba using PC page logo'
+
+    const headerTitle = document.createElement('p')
+    headerTitle.classList.add('header-title')
+    headerTitle.textContent = 'Lorem ipsum blog'
+
+    headerLogoWrapper.append(headerLogo)
+    headerTitleWrapper.append(headerLogoWrapper, headerTitle)
+    headerContentWrapper.append(headerTitleWrapper)
 
     const nav = document.createElement('nav')
     nav.classList.add('main-nav')
@@ -45,6 +66,7 @@ export function createPageMainHeader() {
     })
 
     nav.append(menuList)
-    header.append(nav)
+    headerContentWrapper.append(nav)
+    header.append(headerContentWrapper)
     return header
 }
